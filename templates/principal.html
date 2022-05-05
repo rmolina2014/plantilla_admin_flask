@@ -1,0 +1,195 @@
+{% extends "plantilla.html" %}
+{% block content %}
+  <div id="listado">
+
+        <div class="col-10">
+        
+        <div class="alerta">
+
+          <div class="container">
+            <div class="row">
+              <div class="col" >
+               Peligro: Temperatura 
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+              <div class="col">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                <span>Ubicación</span>
+                </button>
+                </form>
+              </div>  
+            </div>
+          </div>
+
+        </div>
+
+        </div>    
+
+
+       <div class="col-10">
+        
+        <div class="alerta">
+
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                Peligro: Temperatura 
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+           
+              <div class="col">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                Ubicación
+                </button>
+              </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        </div>    
+        
+        <div class="col-10">
+        <div class="alerta warning">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <p> Peligro: Temperatura </p>
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+           
+              <div class="col">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                Ubicación
+                </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <div class="col-10">
+        <div class="alerta success">
+           <div class="container">
+            <div class="row">
+              <div class="col">
+                Peligro: Temperatura 
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+           
+              <div class="col">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                Ubicación
+                </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-10">
+        <div class="alerta info">
+            <div class="container">
+            <div class="row">
+              <div class="col">
+                Peligro: Temperatura 
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+           
+              <div class="col">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                Ubicación
+                </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      </div>  
+      </div>  
+      </div>       
+    </article>
+
+
+    <article>
+
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+ 
+    </article>
+
+
+    <article>
+
+      <div id="map"></div>
+
+{% endblock %}

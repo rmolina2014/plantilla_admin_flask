@@ -1,0 +1,17 @@
+{% extends "plantilla.html" %}
+{% block content %}
+ <div id="map"></div>
+ <script type="text/javascript">
+
+ var map = L.map('map').setView([-31.5344607, -68.5294144], 13);
+
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  
+  L.marker([-31.5344607, -68.5294144]).addTo(map)
+  .bindPopup('001 - Ubicación')
+  .openPopup();
+
+</script>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "plantilla.html" %}
+{% block content %}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Alertas 2022</h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  
+  <!-- Main contenido principal   -->
+  <div class="content">
+    <div class="container-fluid">
+      <div id="listado" class="mx-auto" style="width: 1600px;" >
+      </div>
+  </div>
+</div><!-- /.container-fluid -->
+</div><!-- /.content -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<!--script src="plugins/jquery/jquery.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<!--script-- src="plugins/bootstrap/js/bootstrap.bundle.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<!--script src="static/js/adminlte.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<script>
+  //setTimeout(buscarAlert, 5000);
+  // 1 - buscar las alertas cada 5 minutos  
+ 
+  // 2 - ajustar el tiempo de busqueda 1000 ms = 1 segundo
+  //setTimeout(buscarAlert, 5000);
+
+  function buscarAlert()
+  {
+   //alert("1");
+    $.ajax({
+       url: '/alerta_lectura',
+       type: 'POST',
+       success: function(response) {
+             
+           // solo muestro uno por vez
+           //$('#listado').append(`<div class="col"><div class="alert alert-${response.alerta}"><strong>${response.sensor}</strong> ${response.fechahora} - ${response.ubicacion} </div></div>`);
+           $('#listado').append(`<div class="col-4"><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><h5> ${lectura.fechahora}</h5> <h5> ${lectura.ubicacion}</h5> </div></div>`);
+
+           //console.log(response);
+       },
+       error: function(error) {
+           console.log(error);
+       }
+   });
+
+  }
+
+  //setInterval(buscarAlert55, 9000);
+  $(document).ready(function(){
+   
+    $.ajax({
+       url: '/alerta_lectura',
+       type: 'POST',
+       success: function(response)
+       {
+        //alert(response);
+        $.each(response, function(p,lectura)
+          {
+              $('#listado').append(`<div class="col-4"><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><p style="text-align: right"> ${lectura.fechahora}</p> <h5> ${lectura.ubicacion}</h5> </div></div>`);
+           });//fin each
+       },
+       error: function(error) {
+           console.log(error);
+       }
+   });
+ 
+});
+
+</script>
+{% endblock %}

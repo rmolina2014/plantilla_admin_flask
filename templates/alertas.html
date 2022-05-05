@@ -1,0 +1,211 @@
+{% extends "plantilla.html" %}
+{% block content %}
+
+<div id="listado">
+</div> 
+
+<div class="col-12">
+      
+      <div class="alerta peligro">
+
+        <div class="container">
+          <div class="row" >
+              <div class="col-3" >
+              <p > Peligro: Temperatura </p>
+              </div>
+              <div class="col-3">
+                Lugar: Centro Civico
+              </div>
+              <div class="col-3">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+              <div class="col-3 text-center " >
+      
+                
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                 Ubicación
+                </button>
+                </form>
+             
+              </div>  
+          </div>
+        </div>
+
+      </div>
+
+    </div>    
+
+
+       <div class="col-12">
+        
+        <div class="alerta peligro">
+
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                Peligro: Temperatura 
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+           
+              <div class="col text-center">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                Ubicación
+                </button>
+              </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        </div>    
+        
+        <div class="col-10">
+        <div class="alerta atencion">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <p> Peligro: Temperatura </p>
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+           
+              <div class="col text-center">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                Ubicación
+                </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <div class="col-10">
+        <div class="alerta success">
+           <div class="container">
+            <div class="row">
+              <div class="col">
+                Peligro: Temperatura 
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+           
+              <div class="col text-center">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                Ubicación
+                </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-10">
+        <div class="alerta info">
+            <div class="container">
+            <div class="row">
+              <div class="col">
+                Peligro: Temperatura 
+              </div>
+              <div class="col">
+                Lugar: Centro Civico
+              </div>
+              <div class="col">
+                Fecha/Hora: 17 12 2019 09:37:15
+              </div>
+           
+              <div class="col text-center">
+                <form action="/alerta_ubicacion" method="POST">
+                <input type="hidden" name="ubicacion_id" value="1">
+                <button class="btn btn-outline-light">
+                Ubicación
+                </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+<!--script src="plugins/jquery/jquery.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+<script>
+  //setTimeout(buscarAlert, 5000);
+  // 1 - buscar las alertas cada 5 minutos  
+ 
+  // 2 - ajustar el tiempo de busqueda 1000 ms = 1 segundo
+  //setTimeout(buscarAlert, 5000);
+  
+  //setInterval(buscarAlert55, 9000);
+  $(document).ready(function(){
+   
+   $.ajax({
+      url: '/alerta_lectura',
+      type: 'POST',
+      success: function(response)
+      {
+       //alert(response);
+       $.each(response, function(p,lectura)
+         {
+          var id=lectura.ubicacion_id;  
+         // alert('id: '+id);
+          
+         $('#listado').append(`<div class="alerta ${lectura.alerta}">
+                                <div class="container">
+                                  <div class="row" >
+                                      <div class="col-3" >
+                                       ${lectura.tipo} : ${lectura.sensor} 
+                                      </div>
+                                      <div class="col-3">
+                                        Lugar: ${lectura.ubicacion_nombre}
+                                      </div>
+                                      <div class="col-3">
+                                        Fecha/Hora: ${lectura.fechahora}
+                                      </div>
+                                      <div class="col-3 text-center " >
+                                        <form action="/alerta_ubicacion" method="POST">
+                                        <input type="hidden" name="id_ubicacion" value="${lectura.ubicacion_id}">
+                                        <button class="btn btn-outline-light">
+                                         Ubicación
+                                        </button>
+                                        </form>
+                                      </div>  
+                                  </div>
+                                </div>
+                              </div>`);
+            });//fin each
+      },
+      error: function(error) {
+          console.log(error);
+      }
+  });
+
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "plantilla.html" %}
+{% block content %}
+
+ <input type="hidden" id="id_ubicacion" value="{{ id_ubicacion}}">
+ <div id="mapid" style="height: 600px; margin-top: 50px; position: relative; outline: none;"></div>
+
+ <script>
+  
+  $(document).ready(function()
+  {
+    var id_ubicacion=$("#id_ubicacion").val();
+
+     traerUbicacion(id_ubicacion);  
+
+  });  
+           
+  var map = L.map('mapid').setView([-31.5344607, -68.5294144], 18);
+    
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 18
+                }).addTo(map); 
+
+  function traerUbicacion(ubicacion_id)
+    {
+       $.ajax({
+              url: '/datos_ubicacion',
+              type: 'POST',
+              data: {ubicacion_id: ubicacion_id },
+              success: function(response)
+              {
+             
+                $.each(response, function(p,parada)
+                {
+                 var a= parada.toString();
+                 alert(a);
+                
+                 var coordenadas = a.split(",");    
+                
+                 var marker = L.marker([coordenadas[0],coordenadas[1] ]);
+                 marker.bindPopup("Edificio : "+coordenadas[2] );
+                 marker.addTo(map);
+
+                 map.flyTo([coordenadas[0],coordenadas[1]], 18);
+                
+                });//fin each
+
+             },
+             error: function(error) {
+                 console.log(error);
+            }
+        });
+ }             
+
+</script>
+{% endblock %}

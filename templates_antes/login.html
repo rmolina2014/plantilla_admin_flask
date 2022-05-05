@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Demo PanelControl</title>
+
+  <!-- Font Awesome Icons -->
+  <!--link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css"-->
+
+  <link href="{{ url_for('static', filename='css/all.min.css') }}" rel="stylesheet">
+
+  <!-- Theme style -->
+  <!--link rel="stylesheet" href="static/css/adminlte.min.css"-->
+
+  <link href="{{ url_for('static', filename='css/adminlte.css') }}" rel="stylesheet">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<!--leaflet-->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+crossorigin="">
+</script>
+
+
+</head>
+<body class="login-page" style="min-height: 496.391px;">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href=" "><b>Demo</b>2021</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Ingresar al sistema.</p>
+
+        <br>
+        <div class="msg">{{ msge }}</div>
+        <br>
+  
+        <form action="{{ url_for('login') }}" method="post">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" name="username" id="username" placeholder="Nombre de Usuario" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Clave" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+  
+           
+           
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+            </div>
+          </div>
+        </form>
+  
+        <p><a href="{{ url_for('principal') }}"> ir a la plantilla principal </a></p>
+  
+  
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+  <!-- /.login-box -->
+  
+  <!-- jQuery -->
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../../dist/js/adminlte.min.js"></script>
+  
+  
+ 

@@ -3,15 +3,13 @@
 
  <input type="hidden" id="id_ubicacion" value="{{ id_ubicacion}}">
  <div id="mapid" style="height: 600px; margin-top: 50px; position: relative; outline: none;"></div>
-
+ <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
  <script>
-  
+ 
   $(document).ready(function()
   {
     var id_ubicacion=$("#id_ubicacion").val();
-
-     traerUbicacion(id_ubicacion);  
-
+    traerUbicacion(id_ubicacion);  
   });  
            
   var map = L.map('mapid').setView([-31.5344607, -68.5294144], 18);
@@ -22,35 +20,35 @@
                 }).addTo(map); 
 
   function traerUbicacion(ubicacion_id)
-    {
-       $.ajax({
+  {
+    $.ajax({
               url: '/datos_ubicacion',
               type: 'POST',
               data: {ubicacion_id: ubicacion_id },
               success: function(response)
               {
-             
                 $.each(response, function(p,parada)
                 {
                  var a= parada.toString();
                  alert(a);
-                
                  var coordenadas = a.split(",");    
-                
                  var marker = L.marker([coordenadas[0],coordenadas[1] ]);
                  marker.bindPopup("Edificio : "+coordenadas[2] );
                  marker.addTo(map);
-
+                 marker.openPopup();
+            
                  map.flyTo([coordenadas[0],coordenadas[1]], 18);
-                
                 });//fin each
-
              },
              error: function(error) {
                  console.log(error);
             }
         });
- }             
 
+        popup
+        .setLatLng(e.latlng) // Sets the geographical point where the popup will open.
+        .setContent("Has hecho click en la coordenada: ") // Sets the HTML content of the popup.
+        .openOn(map);
+ }             
 </script>
 {% endblock %}

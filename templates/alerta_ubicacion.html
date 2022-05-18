@@ -30,7 +30,6 @@
                 $.each(response, function(p,parada)
                 {
                  var a= parada.toString();
-                 alert(a);
                  var coordenadas = a.split(",");    
                  var marker = L.marker([coordenadas[0],coordenadas[1] ]);
                  marker.bindPopup("Edificio : "+coordenadas[2] );

@@ -152,7 +152,7 @@ i {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-top: 35px;
+  /*margin-top: 35px;*/
 }
 
 .page-header .admin-menu li:nth-last-child(2) {
@@ -626,3 +626,11 @@ i {
 /* mapa */
 
 #map { height: 480px; }
+
+/* logo */
+.brand {
+  text-align: left !important;
+  font-size: 22px;
+  padding-left: 20px;
+  line-height: 50px !important;
+}

@@ -1,195 +1,165 @@
 {% extends "plantilla.html" %}
 {% block content %}
-  <div id="listado">
+<style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
 
-        <div class="col-10">
-        
-        <div class="alerta">
+  #mapid {
+    height: 480px;
+  }
+</style>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Panel Principal</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Inicio </a></li>
+          <li class="breadcrumb-item active">Panel de Control</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
 
-          <div class="container">
-            <div class="row">
-              <div class="col" >
-               Peligro: Temperatura 
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-              <div class="col">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                <span>Ubicación</span>
-                </button>
-                </form>
-              </div>  
-            </div>
-          </div>
+<!-- Main contenido principal   -->
+<div class="content">
+  <div class="container-fluid">
 
+    <div class="card">
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-chart-pie mr-1"></i>
+          Alertas
+        </h3>
+        <div class="card-tools">
+          <ul class="nav nav-pills ml-auto">
+            <!--li class="nav-item">
+                <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+              </li-->
+          </ul>
+        </div>
+      </div><!-- /.card-header -->
+      <div class="card-body">
+        <div id="listado" class="mx-auto" style="width: 1600px;">
         </div>
 
-        </div>    
+      </div><!-- /.card-body -->
+    </div>
 
 
-       <div class="col-10">
-        
-        <div class="alerta">
 
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                Peligro: Temperatura 
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-           
-              <div class="col">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                Ubicación
-                </button>
-              </form>
-              </div>
-            </div>
-          </div>
-
+    <div class="card">
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-chart-pie mr-1"></i>
+          Ubicaciones
+        </h3>
+        <div class="card-tools">
+          <ul class="nav nav-pills ml-auto">
+            <!--li class="nav-item">
+                <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area  </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+              </li-->
+          </ul>
         </div>
+      </div><!-- /.card-header -->
+      <div class="card-body">
 
-        </div>    
-        
-        <div class="col-10">
-        <div class="alerta warning">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <p> Peligro: Temperatura </p>
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-           
-              <div class="col">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                Ubicación
-                </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="mapid"></div>
+
+
+
       </div>
+    </div><!-- /.card-body -->
+
+  </div>
 
 
-        <div class="col-10">
-        <div class="alerta success">
-           <div class="container">
-            <div class="row">
-              <div class="col">
-                Peligro: Temperatura 
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-           
-              <div class="col">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                Ubicación
-                </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+</div>
+<!-- /.info-box -->
 
-        <div class="col-10">
-        <div class="alerta info">
-            <div class="container">
-            <div class="row">
-              <div class="col">
-                Peligro: Temperatura 
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-           
-              <div class="col">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                Ubicación
-                </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>  
-
-      </div>  
-      </div>  
-      </div>       
-    </article>
+</div>
+</div>
 
 
-    <article>
+</div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
 
-      <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<!--script src="plugins/jquery/jquery.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<!--script-- src="plugins/bootstrap/js/bootstrap.bundle.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<!--script src="static/js/adminlte.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<script>
+  var map = L.map('mapid').setView([-31.5344607, -68.5294144], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
 
- 
-    </article>
+  L.marker([-31.5344607, -68.5294144]).addTo(map)
+    .bindPopup('001 - Ubicación')
+    .openPopup();
 
+  $(document).ready(function () {
+    // 1 - agregar marcadores de las ubicaciones al mapa
+    $.ajax({
+      url: '/buscar_ubicacion',
+      type: 'POST',
+      success: function (response) {
+        // alert(response);  
+        $.each(response, function (p, parada) {
+          var a = parada.toString();
+          //alert (a);
+          var coordenadas = a.split(",");
+          var marker = L.marker([coordenadas[0], coordenadas[1]]);
+          marker.bindPopup("Edificio : " + coordenadas[2]);
+          marker.addTo(map);
+        });//fin each
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
 
-    <article>
+    // 2 mostrar las alertas 
+    $.ajax({
+      url: '/alerta_lectura',
+      type: 'POST',
+      success: function (response) {
+        //alert(response);
 
-      <div id="map"></div>
+        $.each(response, function (p, lectura) {
+          $('#listado').append(`<div class="col-4"><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><p style="text-align: right"> ${lectura.fechahora}</p> <h5> ${lectura.ubicacion_nombre}</h5> </div></div>`);
+        });//fin each
+        // solo muestro uno por vez
+        //$('#listado').append(`<div class="col"><div class="alert alert-${response.alerta}"><strong>${response.sensor}</strong> ${response.fechahora} - ${response.ubicacion} </div></div>`);
 
+        //console.log(response);
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+
+  });
+
+</script>
 {% endblock %}

@@ -1,211 +1,81 @@
 {% extends "plantilla.html" %}
 {% block content %}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Alertas 2023</h1>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
 
-<div id="listado">
-</div> 
+<!-- Main contenido principal   -->
+<div class="content">
+  <div class="container-fluid">
+    <div id="listado" class="mx-auto" style="width: 1600px;">
+    </div>
+  </div>
+</div><!-- /.container-fluid -->
+</div><!-- /.content -->
 
-<!--div class="col-12">
-      
-      <div class="alerta peligro">
-
-        <div class="container">
-          <div class="row" >
-              <div class="col-3" >
-              <p > Peligro: Temperatura </p>
-              </div>
-              <div class="col-3">
-                Lugar: Centro Civico
-              </div>
-              <div class="col-3">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-              <div class="col-3 text-center " >
-      
-                
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                 Ubicación
-                </button>
-                </form>
-             
-              </div>  
-          </div>
-        </div>
-
-      </div>
-
-    </div>    
-
-
-       <div class="col-12">
-        
-        <div class="alerta peligro">
-
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                Peligro: Temperatura 
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-           
-              <div class="col text-center">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                Ubicación
-                </button>
-              </form>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        </div>    
-        
-        <div class="col-10">
-        <div class="alerta atencion">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <p> Peligro: Temperatura </p>
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-           
-              <div class="col text-center">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                Ubicación
-                </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-        <div class="col-10">
-        <div class="alerta success">
-           <div class="container">
-            <div class="row">
-              <div class="col">
-                Peligro: Temperatura 
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-           
-              <div class="col text-center">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                Ubicación
-                </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-        <div class="col-10">
-        <div class="alerta info">
-            <div class="container">
-            <div class="row">
-              <div class="col">
-                Peligro: Temperatura 
-              </div>
-              <div class="col">
-                Lugar: Centro Civico
-              </div>
-              <div class="col">
-                Fecha/Hora: 17 12 2019 09:37:15
-              </div>
-           
-              <div class="col text-center">
-                <form action="/alerta_ubicacion" method="POST">
-                <input type="hidden" name="ubicacion_id" value="1">
-                <button class="btn btn-outline-light">
-                Ubicación
-                </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div-->  
-
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
 <!--script src="plugins/jquery/jquery.min.js"></!--script-->
 <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-
+<!-- Bootstrap 4 -->
+<!--script-- src="plugins/bootstrap/js/bootstrap.bundle.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<!--script src="static/js/adminlte.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
 <script>
   //setTimeout(buscarAlert, 5000);
   // 1 - buscar las alertas cada 5 minutos  
- 
+
   // 2 - ajustar el tiempo de busqueda 1000 ms = 1 segundo
   //setTimeout(buscarAlert, 5000);
-  
-  //setInterval(buscarAlert55, 9000);
-  $(document).ready(function(){
-   
-   $.ajax({
+
+  function buscarAlert() {
+    //alert("1");
+    $.ajax({
       url: '/alerta_lectura',
       type: 'POST',
-      success: function(response)
-      {
-       //alert(response);
-       $.each(response, function(p,lectura)
-         {
-          var id=lectura.ubicacion_id;  
-         // alert('id: '+id);
-          
-         $('#listado').append(`<div class="alerta ${lectura.alerta}">
-                                <div class="container">
-                                  <div class="row" >
-                                      <div class="col-3" >
-                                       ${lectura.tipo} : ${lectura.sensor} 
-                                      </div>
-                                      <div class="col-3">
-                                        Lugar: ${lectura.ubicacion_nombre}
-                                      </div>
-                                      <div class="col-3">
-                                        Fecha/Hora: ${lectura.fechahora}
-                                      </div>
-                                      <div class="col-3 text-center " >
-                                        <form action="/alerta_ubicacion" method="POST">
-                                        <input type="hidden" name="id_ubicacion" value="${lectura.ubicacion_id}">
-                                        <button class="btn btn-outline-light">
-                                         Ubicación
-                                        </button>
-                                        </form>
-                                      </div>  
-                                  </div>
-                                </div>
-                              </div>`);
-            });//fin each
-      },
-      error: function(error) {
-          console.log(error);
-      }
-  });
+      success: function (response) {
 
-});
+        // solo muestro uno por vez
+        //$('#listado').append(`<div class="col"><div class="alert alert-${response.alerta}"><strong>${response.sensor}</strong> ${response.fechahora} - ${response.ubicacion} </div></div>`);
+        $('#listado').append(`<div class="col-4"><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><h5> ${lectura.fechahora}</h5> <h5> ${lectura.ubicacion}</h5> </div></div>`);
+
+        //console.log(response);
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+
+  }
+
+  //setInterval(buscarAlert55, 9000);
+  $(document).ready(function () {
+
+    $.ajax({
+      url: '/alerta_lectura',
+      type: 'POST',
+      success: function (response) {
+        //alert(response);
+        $.each(response, function (p, lectura) {
+          $('#listado').append(`<div class="col-4"><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><p style="text-align: right"> ${lectura.fechahora}</p> <h5> ${lectura.ubicacion}</h5> </div></div>`);
+        });//fin each
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+
+  });
 
 </script>
 {% endblock %}

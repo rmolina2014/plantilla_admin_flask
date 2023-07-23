@@ -1,6 +1,6 @@
 import pymysql
 def obtener_conexion():
-    return pymysql.connect(host='localhost',user='root',password='qwer1234',db='tesis2020')
+    return pymysql.connect(host='localhost',user='root',password='',db='tesis_2023')
 """
 #import pymysql
 def obtener_conexion():

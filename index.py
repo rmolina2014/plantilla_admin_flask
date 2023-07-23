@@ -84,10 +84,11 @@ def login():
         # Check if account exists using MySQL
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
+            #cursor.execute('SELECT * FROM usuario WHERE nombre = %s AND clave = %s', (username, password,))
             cursor.execute('SELECT * FROM usuario WHERE usuario = %s AND clave = %s', (username, password,))
         data = cursor.fetchall()
-        #print(data)
-        #print(len(data))
+        print(data)
+        print(len(data))
 
         res= jsonify(data)
         if len(data)==1:
@@ -100,7 +101,7 @@ def login():
                 #msge = 'Logged in successfully!'
                 print("si")
                 flash('es correcto')
-                return render_template('alertas.html')
+                return render_template('principal.html')
         else:
             # Account doesnt exist or username/password incorrect
             msge = 'Datos Incorrectos!!'
@@ -110,38 +111,17 @@ def login():
     # Show the login form with message (if any)
     return render_template('login.html', msge = msge)
 
+# mis consultas las llamo por ajax 23-3-2020
+
 @app.route('/ubicacion')
 def ubicacion():
-    return render_template('ubicacion.html') 
-
-@app.route('/edificios')
-def edificios():
-    return render_template('edificios.html') 
-
-#busca los datos de una ubicacion par amostrar en el mapa
-@app.route('/alerta_ubicacion', methods=['GET', 'POST'])
-def alerta_ubicacion():
-    id_ubicacion = request.form['id_ubicacion']
-    return render_template('alerta_ubicacion.html',id_ubicacion=id_ubicacion)
-
+    return render_template('ubicacion.html')    
 
 @app.route('/buscar_ubicacion', methods=['GET', 'POST'])
 def buscar_ubicacion():
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
         cursor.execute('SELECT `latitud`,`longitud`,`nombre`,`domicilio`,`departamento` FROM `ubicacion`')
-        data = cursor.fetchall()
-    res= jsonify(data)
-    cursor.close()
-    return res 
-    
-
-@app.route('/datos_ubicacion', methods=['GET', 'POST'])
-def datos_ubicacion():  
-    id_ubicacion = request.form['ubicacion_id']
-    conexion = obtener_conexion()
-    with conexion.cursor() as cursor:
-        cursor.execute('SELECT `latitud`,`longitud`,`nombre`,`domicilio`,`departamento` FROM `ubicacion` where id = %s', (id_ubicacion))
         data = cursor.fetchall()
     res= jsonify(data)
     cursor.close()
@@ -155,7 +135,7 @@ def buscar_lectura():
         data = cursor.fetchall()
     res= jsonify(data)
     cursor.close()
-    return res  
+    return res     
 
 @app.route('/alerta_lectura', methods=['GET', 'POST'])
 def buscar_alerta():
@@ -167,7 +147,6 @@ def buscar_alerta():
         #cursor.execute('SELECT `id`,`ubicacion_id`,`fecha_hora`,`sensor_1`,`sensor_8`,`sensor_5`,`sensor_4` FROM `lectura` ')
         cursor.execute('SELECT lectura.`id`, lectura.`ubicacion_id`,lectura.`fecha_hora`, lectura.`sensor_1`, lectura.`sensor_8`, lectura.`sensor_5`, lectura.`sensor_4`, ubicacion.`nombre` FROM `lectura` INNER JOIN `ubicacion` ON (`lectura`.`ubicacion_id` = `ubicacion`.`id`)')
         datos = cursor.fetchall()
-        print(datos)
 
     # 19-01-2021 recorrer los datos y verlos en consola
     # http://copitosystem.com/es/python-mysql-database/
@@ -197,8 +176,7 @@ def buscar_alerta():
     item=[]
     for data in datos:
         idi = data[0]
-        ubicacion_id= data[1]
-        ubicacion_nombre = data[7]
+        ubicacion_id = data[7]
         fecha_hora = data[2].strftime("%d %m %Y %H:%M:%S")
         sensor_1_fuego = data[3]
         sensor_8_temperatura = data[4]
@@ -208,14 +186,14 @@ def buscar_alerta():
         # EVALUACION por prioridad 1 de fuego ,2 de temperatura , 3 de movimiento , 4 de humedad
         if ( sensor_1_fuego == valortrue ) :
           print ("alerta")
-          item={'id':idi, 'ubicacion':ubicacion_id,'sensor':'Fuego','fechahora':fecha_hora,'alerta':'peligro','tipo':'Peligro','ubicacion_nombre':ubicacion_nombre}
+          item={'id':idi, 'ubicacion':ubicacion_id,'sensor':'Fuego','fechahora':fecha_hora,'alerta':'danger'}
           json.append(item)
         else:
           print ("normal")
 
         if ( sensor_8_temperatura >= 30 ) :
           print ("alerta")
-          item={'id':idi, 'ubicacion_id':ubicacion_id,'sensor':'Temperatura','fechahora':fecha_hora,'alerta':'atencion','tipo':'Atención','ubicacion_nombre':ubicacion_nombre}
+          item={'id':idi, 'ubicacion':ubicacion_id,'sensor':'Temperatura','fechahora':fecha_hora,'alerta':'warning'}
           json.append(item)
         else:
           print ("normal")  
@@ -225,9 +203,6 @@ def buscar_alerta():
     cursor.close()
     return jsonify(json)     
 
-      
-
 # starting the app
 if __name__ == "__main__":
     app.run(port=3000, debug=True)
-

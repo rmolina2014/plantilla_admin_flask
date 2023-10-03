@@ -1,0 +1,145 @@
+[
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "CAPITAL;CAPITAL;Bo. LOS MOLINOS;258;14;-31",
+        "null": [
+            "516125;-68",
+            "541351;may-24;SI;1334;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "CHIMBAS;CHIMBAS;Bo. CONJ. HABIT. LOS SURCOS;112;8;-31",
+        "null": [
+            "493739;-68",
+            "544612;jul-24;SI;1335;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "CHIMBAS;CHIMBAS;Bo. LAS TRES MARIAS;59;3;-31",
+        "null": [
+            "509023;-68",
+            "587433;may-24;SI;1346;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "RAWSON;RAWSON;Bo. LA JARILLA;49;1;-31",
+        "null": [
+            "571791;-68",
+            "571912;mar-24;SI;1347;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "RAWSON;RAWSON;Bo. VALLE GRANDE NORTE;35;2;-31",
+        "null": [
+            "559696;-68",
+            "60004;mar-24;SI;1342;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "ALBARDON;VILLICUM;Bo. VILLICUM;137;7;-31",
+        "null": [
+            "408669;-68",
+            "503583;ene-24;SI;1352;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "ANGACO;ANGACO;Bo. JOSE SEGOVIA;17;1;-31",
+        "null": [
+            "446139;-68",
+            "426612;abr-24;SI;1341;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "ANGACO;ANGACO;Bo. MALVINA NOS UNE  sect 1;118;7;-31",
+        "null": [
+            "406279;-68",
+            "405;dic-24;SI;1339;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "ANGACO;ANGACO;Bo. MALVINA NOS UNE- sec2;52;3;-31",
+        "null": [
+            "406279;-68",
+            "405;dic-24;SI;1340;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "CAUCETE;CAUCETE;Bo. EL ALGARROBO- sec 1;104;4;-31",
+        "null": [
+            "639837;-68",
+            "268682;dic-23;SI;1333;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "CAUCETE;CAUCETE;Bo. EL ALGARROBO- sec 2;100;4;-31",
+        "null": [
+            "639837;-68",
+            "268682;dic-23;SI;1349;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "ZONDA;ZONDA;Bo. CONJUNTO 2 AMPLIACION;25;2;-31",
+        "null": [
+            "547333;-68",
+            "739776;ene-24;SI;1336;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "25 DE MAYO;CASUARINAS;Bo. TEHUL;175;8;-31",
+        "null": [
+            "812983;-68",
+            "336765;may-24;SI;1338;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "SARMIENTO;MEDIAGUA;Bo. SOLARES DEL SUR;100;5;-31",
+        "null": [
+            "985808;-68",
+            "434301;abr-24;SI;1345;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "CALINGASTA;SOROCAYENSE;Bo. EL PUERTO;58;2;-31",
+        "null": [
+            "570222;-69",
+            "44371;feb-24;SI;1343;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "VALLE FERTIL;VALLE FERTIL;Bo. AMPLIACION VALLE NORTE ;74;4;-30",
+        "null": [
+            "631052;-67",
+            "455912;ene-24;SI;1348;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "IGLESIA;LAS FLORES;Bo. LAS LOMAS;40;1;-30",
+        "null": [
+            "316969;-69",
+            "203806;may-24;SI;1351;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "IGLESIA;RODEO;Bo. PUENTE VERDE;44;1;-30",
+        "null": [
+            "207893;-69",
+            "123686;feb-24;SI;1337;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "IGLESIA;RODEO;Bo. CUESTA DEL VIENTO AMPL.;33;2;-30",
+        "null": [
+            "209661;-69",
+            "115747;may-24;SI;1353;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": "JACHAL;JACHAL;Bo. AIRES DEL OESTE;53;4;-30",
+        "null": [
+            "235092;-68",
+            "759561;may-24;SI;1344;;"
+        ]
+    },
+    {
+        "DEPARTAMENTO;LOCALIDAD;BARRIO;VIVIENDAS;MOTRIZ;LATITUD;LONGITUD;Fecha de Entrega;Carga en el Sistema;codigo de carga del sistema integrado;;": ";;;;;;;;;;;"
+    }
+]

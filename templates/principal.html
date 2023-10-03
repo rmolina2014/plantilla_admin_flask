@@ -1,0 +1,132 @@
+{% extends "plantilla.html" %}
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Alertas 12/09/2023</h1>
+      </div><!-- /.col -->
+      <!--div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Inicio </a></li>
+          <li class="breadcrumb-item active">Panel de Control</li>
+        </ol>
+      </div-->
+      <!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main contenido principal   -->
+<div class="content">
+
+  <div class="container-fluid">
+    <!--ul>
+        <li><a href="{{ url_for('alertas', id_alertas=232) }}">Página con ID 42</a></li>
+       
+    </ul-->
+    <div class="card">
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class='fas fa-bell'></i>
+          Informacion de las alertas
+        </h3>
+        <div class="card-tools">
+          <ul class="nav nav-pills ml-auto" id="alertas2023">
+            <!--li class="nav-item">
+                <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+              </li-->
+          </ul>
+        </div>
+      </div><!-- /.card-header -->
+      <div class="card-body">
+        <div id="listado" class="mx-auto" style="width: 1600px;">
+      
+        </div>
+      </div><!-- /.card-body -->
+   </div>
+  </div>
+</div>
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<script>
+
+$(document).ready(function () {
+    
+    // buscar las alertas 
+    
+     $.ajax({
+       url: '/buscar_todas_alerta',
+       type: 'POST',
+       success: function (response) {
+         //alert(response);
+ 
+         $.each(response, function (p, lectura) {
+           $('#listado').prepend(`<div class="col-4"><div class="alert alert-${lectura.alerta}">
+<label>${lectura.sensor}</label><label> Id: ${ lectura.id}</label><p style="text-align: right">${lectura.fechahora}</p> <h5> ${lectura.nombre_ubicacion}</h5><form action="{{ url_for('alertas') }}" method="post"><input type="hidden" name="id_alerta" value="${lectura.id}"><div class="d-grid gap-2 d-md-flex justify-content-md-end"><button type="submit" class="btn btn-outline-dark" style="text-align: right">Ver Detalles</button></div></form></div></div>`);
+         });//fin each
+       
+         // solo muestro uno por vez
+         //$('#listado').append(`<div class="col"><div class="alert alert-${response.alerta}"><strong>${response.sensor}</strong> ${response.fechahora} - ${response.ubicacion} </div></div>`);
+ 
+         //console.log(response);
+       },
+       error: function (error) {
+         console.log(error);
+       }
+     });
+
+    // ejecute cada 20 segundos
+    setInterval('buscar_alerta2023()', 20000);
+
+  });
+
+  function buscar_alerta2023() {
+    $.ajax({
+      url: '/buscar_alerta',
+      type: 'POST',
+      success: function (response) {
+        //alert(response);
+
+        $.each(response, function (p, lectura) {
+          
+          // antes $('#listado').append(`<div class="col-4" ><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><label> Id: ${lectura.id}</label><p style="text-align: right"> ${lectura.fechahora}</p> <h5> ${lectura.nombre_ubicacion}</h5> </div></div>`);
+
+          //$('#listado').prepend(`<div class="col-4" ><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><label> Id: ${lectura.id}</label><p style="text-align: right"> ${lectura.fechahora}</p> <h5> ${lectura.nombre_ubicacion}</h5> </div></div>`)
+          // });//fin each
+
+        // solo muestro uno por vez
+        //$('#listado').append(`<div class="col"><div class="alert alert-${response.alerta}"><strong>${response.sensor}</strong> ${response.fechahora} - ${response.ubicacion} </div></div>`);
+
+        //console.log(response);
+
+
+          $('#listado').prepend(`<div class="col-4"><div class="alert alert-${lectura.alerta}">
+<label>${lectura.sensor}</label><label> Id: ${lectura.id}</label><p style="text-align: right">${lectura.fechahora}</p> <h5> ${lectura.nombre_ubicacion}</h5><form action="{{ url_for('alertas') }}" method="post"><input type="hidden" name="id_alerta" value="${lectura.id}"><div class="d-grid gap-2 d-md-flex justify-content-md-end"><button type="submit" class="btn btn-outline-dark" style="text-align: right">Ver Detalles</button></div></form></div></div>`);
+
+           });//fin each
+
+
+
+
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+</script>
+{% endblock %}

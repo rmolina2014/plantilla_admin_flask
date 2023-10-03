@@ -1,0 +1,131 @@
+{% extends "plantilla.html" %}
+{% block content %}
+
+<style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+
+  #mapid {
+    height: 380px;
+  }
+</style>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Alerta</h1>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main contenido principal   -->
+<div class="content">
+  <div class="container-fluid">
+    
+    <div class="card">
+        <div class="card-header ui-sortable-handle" style="cursor: move;">
+          <h3 class="card-title">
+            <i class="fas fa-chart-pie mr-1"></i>
+            Lectura  
+          </h3>
+          <div class="card-tools">
+            
+          </div>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Ubicación</th>
+                <th>Fecha Hora</th>
+                <th>Sensor 1</th>
+                <th>Sensor 8</th>
+                <th>Sensor 5</th>
+                <th>Sensor 4</th>
+              </tr>
+            </thead>
+            <tbody id="contenido">
+                            
+            </tbody>
+          </table>
+        </div><!-- /.card-body -->
+    </div>
+
+    <div class="card">
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-chart-pie mr-1"></i>
+          Ubicación
+        </h3>
+        <div class="card-tools">
+          <ul class="nav nav-pills ml-auto">
+            <!--li class="nav-item">
+                <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area  </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+              </li-->
+          </ul>
+        </div>
+      </div><!-- /.card-header -->
+      <div class="card-body">
+        <div id="mapid"></div>
+      </div>
+    </div><!-- /.card-body -->
+
+  </div><!-- /.container-fluid -->
+</div><!-- /.content -->
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<script>
+
+$(document).ready(function ()
+   {
+    // 1 - agregar las lecturas 
+    $.ajax({
+       url: '/buscar_lectura_alerta',
+       data:  {id_alerta:'{{id_alerta}}'},
+       type: 'POST',
+       success: function(response) {
+           $.each(response, function(p,parada)
+           {
+             var a= parada.toString();
+             var coordenadas = a.split(","); 
+             
+             $('#contenido').append(`<tr><td>${coordenadas[0]}</td><td>${coordenadas[1]}</td><td>${coordenadas[3]}</td><td>${coordenadas[4]}</td><td>${coordenadas[5]}</td><td>${coordenadas[6]}</td><td>${coordenadas[7]}</td></tr>`);
+             
+             ///MAPAS
+
+   var map = L.map('mapid').setView([coordenadas[9], coordenadas[10]], 15);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+             // Dibujar mapa
+                var marker = L.marker([coordenadas[9], coordenadas[10]]);
+                marker.bindPopup("Edificio: " + coordenadas[8]);
+                marker.addTo(map);
+
+           });//fin each
+           console.log(response);
+       },
+       error: function(error) {
+           console.log(error);
+       }
+   });
+
+  });
+</script>
+{% endblock %}

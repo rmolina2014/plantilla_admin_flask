@@ -1,0 +1,18 @@
+TESIS
+
+29/05/2022
+
+- arreglar el logo del menu
+- arreglar el logo del pie de pagina
+-
+
+01/06/2022
+
+commit
+
+14/08/2023
+
+generar aLERTAS EN FORMA DE RANDON
+https://j2logo.com/python/generar-numeros-aleatorios-en-python/#:~:text=La%20funci%C3%B3n%20randrange(a%2C%20b,%2C%2017%2C%2021%2C%2025%20.
+
+arreglar orden inverso

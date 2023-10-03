@@ -1,0 +1,220 @@
+{% extends "plantilla.html" %}
+{% block content %}
+<style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+
+  #mapid {
+    height: 480px;
+  }
+</style>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Panel Principal 10/08/2023</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Inicio </a></li>
+          <li class="breadcrumb-item active">Panel de Control</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main contenido principal   -->
+<div class="content">
+  <div class="container-fluid">
+
+    <div class="card">
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-chart-pie mr-1"></i>
+          generar alertas 10/08/2023
+        </h3>
+        {% for elemento in numbers %}
+        {{ elemento }}
+        {% endfor %}
+
+        <div class="card-tools">
+          <ul class="nav nav-pills ml-auto">
+            <!--li class="nav-item">
+                <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+              </li-->
+          </ul>
+        </div>
+      </div><!-- /.card-header -->
+      <div class="card-body">
+        <div id="listado" class="mx-auto" style="width: 1600px;">
+        </div>
+
+      </div><!-- /.card-body -->
+    </div>
+
+
+
+    <div class="card">
+      <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-chart-pie mr-1"></i>
+          Ubicaciones
+        </h3>
+        <div class="card-tools">
+          <ul class="nav nav-pills ml-auto">
+            <!--li class="nav-item">
+                <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area  </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+              </li-->
+          </ul>
+        </div>
+      </div><!-- /.card-header -->
+      <div class="card-body">
+
+        <div id="mapid"></div>
+
+
+
+      </div>
+    </div><!-- /.card-body -->
+
+  </div>
+
+
+</div>
+<!-- /.info-box -->
+
+</div>
+</div>
+
+
+</div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<!--script src="plugins/jquery/jquery.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<!--script-- src="plugins/bootstrap/js/bootstrap.bundle.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<!--script src="static/js/adminlte.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<script>
+  var map = L.map('mapid').setView([-31.5344607, -68.5294144], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  L.marker([-31.5344607, -68.5294144]).addTo(map)
+    .bindPopup('001 - Ubicación')
+    .openPopup();
+
+  $(document).ready(function () {
+
+    // ejecutar cada 20secon
+    //let timer = setInterval('generar()', 5000);
+
+//setTimeout(() => {
+ // clearInterval(timer);
+//}, 120000);
+   
+// 27/08/2023 cada 20 segundos
+setInterval('obtener_datos()',20000);
+
+    // 1 - agregar marcadores de las ubicaciones al mapa
+    $.ajax({
+      url: '/buscar_ubicacion',
+      type: 'POST',
+      success: function (response) {
+         //alert(response);  
+        $.each(response, function (p, parada) {
+          var a = parada.toString();
+          //alert (a);
+          var coordenadas = a.split(",");
+          var marker = L.marker([coordenadas[0], coordenadas[1]]);
+          marker.bindPopup("Edificio : " + coordenadas[2]);
+          marker.addTo(map);
+        });//fin each
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+
+    // 2 mostrar las alertas de la base de datos
+    /*$.ajax({
+      url: '/alerta_lectura',
+      type: 'POST',
+      success: function (response) {
+        //alert(response);
+
+        $.each(response, function (p, lectura) {
+          $('#listado').append(`<div class="col-4"><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><p style="text-align: right"> ${lectura.fechahora}</p> <h5> ${lectura.ubicacion}</h5> </div></div>`);
+        });//fin each
+        // solo muestro uno por vez
+        //$('#listado').append(`<div class="col"><div class="alert alert-${response.alerta}"><strong>${response.sensor}</strong> ${response.fechahora} - ${response.ubicacion} </div></div>`);
+
+        //console.log(response);
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });*/
+
+    
+
+  });// fin del jquery
+  
+  let=1;
+
+
+  function generar(){
+    // 3 generar un alerta aleatorio
+    $.ajax({
+      url: '/numeros_aleatorios',
+      type: 'POST',
+      success: function (data) {
+        //alert(response);
+        $('#listado').append(`<div class="col-4"><div class="alert alert-${data.alert}"><label>${data.sensor}</label><p style="text-align: right"> ${data.fechahora}</p> <h5> ${data.ubicacion}</h5> </div></div>`);
+        //console.log(response);
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+
+  }
+
+  function obtener_datos() {
+      // 3 generar un alerta aleatorio
+      $.ajax({
+        url: '/generar_datos',
+        type: 'POST',
+        success: function (data) {
+         // alert(data);
+
+//$('#listado').append(`<div class="col-4"><div class="alert alert-${data.alert}"><label>${data.sensor}</label><p style="text-align: right"> ${data.fechahora}</p> <h5> ${data.ubicacion}</h5> </div></div>`);
+          console.log(data);
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+
+    }
+
+</script>
+{% endblock %}

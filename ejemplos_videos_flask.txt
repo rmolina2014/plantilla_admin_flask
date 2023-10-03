@@ -1,0 +1,17 @@
+Aplicación de tareas con Python, Flask y MySQL. Gestión de usuarios
+
+https://www.youtube.com/watch?v=Pazfs5SepzI&t=4s
+
+
+Como ver datos de sensores de temperatura de una plataforma Istsos (como viewer) - Tutorial
+
+https://www.youtube.com/watch?v=UFNQKduIjdE
+
+Creación de API en Flask y consumirla con AJAX
+
+https://www.youtube.com/watch?v=OeCNYfN_tCE
+
+Flask con Redis y validar que la aplicación solo permita una sesión por usuario
+https://www.youtube.com/watch?v=sgJZna1fJH4
+
+

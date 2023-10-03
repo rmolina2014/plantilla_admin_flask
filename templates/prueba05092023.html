@@ -1,0 +1,201 @@
+{% extends "plantilla.html" %}
+{% block content %}
+<style>
+    .fakeimg {
+        height: 200px;
+        background: #aaa;
+    }
+
+    #mapid {
+        height: 480px;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Panel Principal 27/08/2023</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Inicio </a></li>
+                    <li class="breadcrumb-item active">Panel de Control</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main contenido principal   -->
+<div class="content">
+    <div class="container-fluid">
+
+        <button id="agregarBoton">Agregar Div</button>
+        <div id="contenedor2">
+            <!-- Aquí se agregarán los divs dinámicamente -->
+        </div>
+
+
+        <button id="agregar">agregar</button>
+        <div class="card" id="alert">
+            <div class="alert alert-primary" role="alert">
+                A simple primary alert—check it out!
+            </div>
+            <div class="alert alert-secondary" role="alert">
+                A simple secondary alert—check it out!
+            </div>
+            <div class="alert alert-success" role="alert">
+                A simple success alert—check it out!
+            </div>
+            <div class="alert alert-danger" role="alert">
+                A simple danger alert—check it out!
+            </div>
+            <div class="alert alert-warning" role="alert">
+                A simple warning alert—check it out!
+            </div>
+            <div class="alert alert-info" role="alert">
+                A simple info alert—check it out!
+            </div>
+            <div class="alert alert-light" role="alert">
+                A simple light alert—check it out!
+            </div>
+            <div class="alert alert-dark" role="alert">
+                A simple dark alert—check it out!
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header ui-sortable-handle" style="cursor: move;">
+                <h3 class="card-title">
+                    <i class="fas fa-chart-pie mr-1"></i>
+                    Alertas solo pruebas 05092023
+                </h3>
+                <div class="card-tools">
+                    <ul class="nav nav-pills ml-auto" id="alertas2023">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+                <div id="listado" class="mx-auto" style="width: 1600px;">
+
+                </div>
+
+            </div><!-- /.card-body -->
+        </div>
+
+
+
+
+    </div>
+</div>
+<!-- /.info-box -->
+</div>
+</div>
+</div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<!--script src="plugins/jquery/jquery.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<!--script-- src="plugins/bootstrap/js/bootstrap.bundle.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<!--script src="static/js/adminlte.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<script>
+
+    $(document).ready(function () {
+
+
+        var contador = 0;
+
+        // Función para agregar un div al contenedor
+        function agregarDiv() {
+            contador++;
+            var nuevoDiv = $('<div>').text('Div #' + contador);
+            var alert = '<div class="alert alert-dark" role="alert">' + contador + '</div > ';
+            $('#contenedor2').prepend(alert); // Agregar el nuevo div al principio del contenedor
+        }
+
+        // Manejar el evento de clic para agregar un nuevo div
+        $('#agregarBoton').click(function () {
+            agregarDiv();
+        });
+
+
+        $("#agregar").click(function (event) {
+            //$("p").empty();
+            $('#alert').append(`<div class="alert alert-dark" role="alert">
+                A simple dark alert—check it out!
+            </div>`);
+        });
+        $("#boton02").click(function (event) {
+            $("#boton02").empty();
+        });
+        $("#boton03").click(function (event) {
+            $(".boton03").empty();
+        });
+
+        // 2 mostrar las alertas 
+        /*
+         $.ajax({
+           url: '/buscar_alerta89898',
+           type: 'POST',
+           success: function (response) {
+             //alert(response);
+     
+             $.each(response, function (p, lectura) {
+               $('#listado').append(`<div class="col-4"><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><p style="text-align: right"> ${lectura.fechahora}</p> <h5> ${lectura.ubicacion}</h5> </div></div>`);
+             });//fin each
+             // solo muestro uno por vez
+             //$('#listado').append(`<div class="col"><div class="alert alert-${response.alerta}"><strong>${response.sensor}</strong> ${response.fechahora} - ${response.ubicacion} </div></div>`);
+     
+             //console.log(response);
+           },
+           error: function (error) {
+             console.log(error);
+           }
+         });*/
+
+        // ejecute cada 10 segundos
+        setInterval('buscar_alerta2023()', 10000);
+
+
+
+    });
+
+    function buscar_alerta2023() {
+        $.ajax({
+            url: '/buscar_alerta',
+            type: 'POST',
+            success: function (response) {
+                //alert(response);
+                $('#listado').empty();
+
+                $.each(response, function (p, lectura) {
+                    $('#listado').append(`<div class="col-4" ><div class="alert alert-${lectura.alerta}"><label>${lectura.sensor}</label><label> Id: ${lectura.id}</label><p style="text-align: right"> ${lectura.fechahora}</p> <h5> ${lectura.nombre_ubicacion}</h5> </div></div>`);
+                });//fin each
+                // solo muestro uno por vez
+                //$('#listado').append(`<div class="col"><div class="alert alert-${response.alerta}"><strong>${response.sensor}</strong> ${response.fechahora} - ${response.ubicacion} </div></div>`);
+
+                //console.log(response);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+</script>
+{% endblock %}

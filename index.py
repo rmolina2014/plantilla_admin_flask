@@ -130,7 +130,7 @@ def buscar_lectura():
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
         # cursor.execute('SELECT `id`,`ubicacion_id`,`fecha_hora`,`sensor_1`,`sensor_8`,`sensor_5`,`sensor_4` FROM `lectura`')
-        cursor.execute('SELECT lectura.`id` ,lectura.`ubicacion_id`,lectura.`fecha_hora`,lectura.`sensor_1`,lectura.`sensor_8`,lectura.`sensor_5`,lectura.`sensor_4`,ubicacion.`nombre` FROM lectura INNER JOIN ubicacion ON (lectura.`ubicacion_id` = ubicacion.`id`)')
+        cursor.execute('SELECT lectura.`id` ,lectura.`ubicacion_id`,lectura.`fecha_hora`,lectura.`sensor_1`,lectura.`sensor_8`,lectura.`sensor_5`,lectura.`sensor_4`,ubicacion.`nombre` FROM lectura INNER JOIN ubicacion ON (lectura.`ubicacion_id` = ubicacion.`id`) order by lectura.`fecha_hora` desc')
     datos = cursor.fetchall()
     json = []
     item = []
@@ -163,9 +163,6 @@ def buscar_lectura_alerta():
     res = jsonify(datos)
     cursor.close()
     return res
-
-
-
 
 # 30/08/2023 se agrega el sql para traer una sola lectura ------------------------------------------------------------
 # SELECT * FROM lectura WHERE id= (SELECT MAX(id) FROM lectura)
@@ -211,9 +208,11 @@ def buscar_alerta():
         fecha_hora = data[2].strftime("%d %m %Y %H:%M:%S")
         sensor_1_fuego = data[3]
         sensor_8_temperatura = data[4]
-        sensor_5 = data[5]
-        sensor_4 = data[6]
+        sensor_5_movimiento = data[5]
+        sensor_4_humedad = data[6]
         nombre_ubicacion = data[7]
+
+        print(data)
 
         # EVALUACION por prioridad 1 de fuego ,2 de temperatura , 3 de movimiento , 4 de humedad
         if (sensor_1_fuego == valortrue):
@@ -226,7 +225,7 @@ def buscar_alerta():
             item = {'id': idi, 'ubicacion': ubicacion_id, 'sensor': 'Fuego',
                     'fechahora': fecha_hora, 'alerta': 'success', 'nombre_ubicacion': nombre_ubicacion}
             json.append(item)
-
+        # 2 de temperatura , 3 de movimiento , 4 de humedad
         if (sensor_8_temperatura >= 30):
             print("alerta")
             item = {'id': idi, 'ubicacion': ubicacion_id, 'sensor': 'Temperatura',
@@ -237,6 +236,35 @@ def buscar_alerta():
             item = {'id': idi, 'ubicacion': ubicacion_id, 'sensor': 'Temperatura',
                     'fechahora': fecha_hora, 'alerta': 'success', 'nombre_ubicacion': nombre_ubicacion}
             json.append(item)
+
+        # 3 de movimiento ,Sensor Detector Movimiento Infrarrojo Sr501 - 5
+        if (sensor_5_movimiento == valortrue):
+            print("alerta")
+            item = {'id': idi, 'ubicacion': ubicacion_id, 'sensor': 'Movimiento',
+                    'fechahora': fecha_hora, 'alerta': 'warning', 'nombre_ubicacion': nombre_ubicacion}
+            json.append(item)
+        else:
+            print("normal")
+            item = {'id': idi, 'ubicacion': ubicacion_id, 'sensor': 'Movimiento',
+                    'fechahora': fecha_hora, 'alerta': 'success', 'nombre_ubicacion': nombre_ubicacion}
+            json.append(item)
+
+        
+        # 4 de humedad, Sensor De Humedad Y Temperatura Dht22 - 4
+        if (sensor_4_humedad >= 90):
+            print("alerta")
+            item = {'id': idi, 'ubicacion': ubicacion_id, 'sensor': 'Humedad',
+                    'fechahora': fecha_hora, 'alerta': 'warning', 'nombre_ubicacion': nombre_ubicacion}
+            json.append(item)
+        else:
+            print("normal")
+            item = {'id': idi, 'ubicacion': ubicacion_id, 'sensor': 'Humedad',
+                    'fechahora': fecha_hora, 'alerta': 'success', 'nombre_ubicacion': nombre_ubicacion}
+            json.append(item)
+
+
+            
+
         # fin de la evaluacion ----------------------------
     cursor.close()
     return jsonify(json)
@@ -247,7 +275,7 @@ def buscar_todas_alerta():
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
         # cursor.execute('SELECT `id`,`ubicacion_id`,`fecha_hora`,`sensor_1`,`sensor_8`,`sensor_5`,`sensor_4` FROM `lectura` ')
-        cursor.execute('SELECT lectura.`id`, lectura.`ubicacion_id`,lectura.`fecha_hora`, lectura.`sensor_1`, lectura.`sensor_8`, lectura.`sensor_5`, lectura.`sensor_4`, ubicacion.`nombre` FROM `lectura` INNER JOIN `ubicacion` ON (`lectura`.`ubicacion_id` = `ubicacion`.`id`)order by lectura.`fecha_hora` desc')
+        cursor.execute('SELECT lectura.`id`, lectura.`ubicacion_id`,lectura.`fecha_hora`, lectura.`sensor_1`, lectura.`sensor_8`, lectura.`sensor_5`, lectura.`sensor_4`, ubicacion.`nombre` FROM `lectura` INNER JOIN `ubicacion` ON (`lectura`.`ubicacion_id` = `ubicacion`.`id`)order by lectura.`fecha_hora` asc')
         # trae el maximo i
         #cursor.execute('SELECT lectura.`id`, lectura.`ubicacion_id`,lectura.`fecha_hora`, lectura.`sensor_1`, lectura.`sensor_8`, lectura.`sensor_5`, lectura.`sensor_4`, ubicacion.`nombre` FROM lectura INNER JOIN ubicacion ON (`lectura`.`ubicacion_id` = `ubicacion`.`id`) WHERE `lectura`.`id`= (SELECT MAX(`id`) FROM lectura)')
         # tod los reg cursor.execute('SELECT lectura.`id`, lectura.`ubicacion_id`,lectura.`fecha_hora`, lectura.`sensor_1`, lectura.`sensor_8`, lectura.`sensor_5`, lectura.`sensor_4`, ubicacion.`nombre` FROM `lectura` INNER JOIN `ubicacion` ON (`lectura`.`ubicacion_id` = `ubicacion`.`id`) order by lectura.`fecha_hora` desc')

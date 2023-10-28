@@ -1,0 +1,86 @@
+{% extends "plantilla.html" %}
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Lecturas</h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  
+  <!-- Main contenido principal   -->
+  <div class="content">
+    <div class="container-fluid">
+
+      <div class="card">
+        <div class="card-header ui-sortable-handle" style="cursor: move;">
+          <h3 class="card-title">
+            <i class="fas fa-chart-pie mr-1"></i>
+            Alertas
+          </h3>
+          <div class="card-tools">
+            
+          </div>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Ubicación</th>
+                <th>Fecha Hora</th>
+                <th>S1 - Sensor de llama Ky-026</th>
+                <th>S8 - Sensor De Temperatura Infrarrojo Mlx90614 </th>
+                <th>S5 - Sensor Detector Movimiento Infrarrojo Sr501 </th>
+                <th>S4 - Sensor De Humedad Y Temperatura Dht22 </th>
+              </tr>
+            </thead>
+            <tbody id="contenido">
+                 
+              
+            </tbody>
+          </table>
+  
+        </div><!-- /.card-body -->
+      </div>
+    
+</div><!-- /.container-fluid -->
+</div><!-- /.content -->
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<!--script src="plugins/jquery/jquery.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<!--script-- src="plugins/bootstrap/js/bootstrap.bundle.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<!--script src="static/js/adminlte.min.js"></!--script-->
+<script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+<script>
+   $(document).ready(function(){
+  // 1 - agregar las lecturas 
+  $.ajax({
+       url: '/buscar_lectura',
+       type: 'POST',
+       success: function(response) {
+           $.each(response, function(p,lectura)
+           {
+            
+             $('#contenido').append(`<tr><td>${lectura.nombre_ubicacion}</td><td>${lectura.fecha_hora}</td><td>${lectura.sensor_1_fuego}</td><td>${lectura.sensor_8_temperatura}</td><td>${lectura.sensor_5_movimiento}</td><td>${lectura.sensor_4_humedad}</td></tr>`);
+           });//fin each
+           console.log(response);
+       },
+       error: function(error) {
+           console.log(error);
+       }
+   });
+});
+
+
+
+</script>
+{% endblock %}

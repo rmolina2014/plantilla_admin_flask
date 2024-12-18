@@ -16,17 +16,27 @@
   <!-- Main contenido principal   -->
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-8">
-          <table class="table">
+
+      <div class="card">
+        <div class="card-header ui-sortable-handle" style="cursor: move;">
+          <h3 class="card-title">
+            <i class="fas fa-chart-pie mr-1"></i>
+            Alertas
+          </h3>
+          <div class="card-tools">
+            
+          </div>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <table class="table table-bordered">
             <thead>
               <tr>
-                <th>Ubicacion</th>
+                <th>Ubicación</th>
                 <th>Fecha Hora</th>
-                <th>Sensor1</th>
-                <th>Sensor2</th>
-                <th>Sensor4</th>
-                <th>Sensor5</th>
+                <th>S1 - Sensor de llama Ky-026</th>
+                <th>S8 - Sensor De Temperatura Infrarrojo Mlx90614 </th>
+                <th>S5 - Sensor Detector Movimiento Infrarrojo Sr501 </th>
+                <th>S4 - Sensor De Humedad Y Temperatura Dht22 </th>
               </tr>
             </thead>
             <tbody id="contenido">
@@ -34,8 +44,10 @@
               
             </tbody>
           </table>
-        </div>
-</div>
+  
+        </div><!-- /.card-body -->
+      </div>
+    
 </div><!-- /.container-fluid -->
 </div><!-- /.content -->
 <!-- REQUIRED SCRIPTS -->
@@ -49,17 +61,16 @@
 <!--script src="static/js/adminlte.min.js"></!--script-->
 <script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
 <script>
-$(document).ready(function(){
+   $(document).ready(function(){
   // 1 - agregar las lecturas 
   $.ajax({
        url: '/buscar_lectura',
        type: 'POST',
        success: function(response) {
-           $.each(response, function(p,parada)
+           $.each(response, function(p,lectura)
            {
-             var a= parada.toString();
-             var coordenadas = a.split(","); 
-             $('#contenido').append(`<tr><td>${coordenadas[1]}</td><td>${coordenadas[3]}</td><td>${coordenadas[2]}</td><td>${coordenadas[4]}</td><td>${coordenadas[5]}</td><td>${coordenadas[6]}</td></tr>`);
+            
+             $('#contenido').append(`<tr><td>${lectura.nombre_ubicacion}</td><td>${lectura.fecha_hora}</td><td>${lectura.sensor_1_fuego}</td><td>${lectura.sensor_8_temperatura}</td><td>${lectura.sensor_5_movimiento}</td><td>${lectura.sensor_4_humedad}</td></tr>`);
            });//fin each
            console.log(response);
        },
@@ -68,6 +79,8 @@ $(document).ready(function(){
        }
    });
 });
+
+
 
 </script>
 {% endblock %}

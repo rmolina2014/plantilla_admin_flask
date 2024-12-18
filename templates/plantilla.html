@@ -98,24 +98,24 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+
+            style='font-size:24px'
           </li-->
 
 
             <li class="nav-item">
               <a href="{{ url_for('principal') }}" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Panel de Control
-                  <i class="right fas fa-angle-left"></i>
+                <i class='nav-icon fas fa-bell'></i>
+                <p> Alertas
+                   <i class="right fas fa-angle-left"></i>
                 </p>
-
               </a>
             </li>
+
             <li class="nav-item">
-              <a href="{{ url_for('alertas') }}" class="nav-link">
-                <i class='fas fa-bell' style='font-size:24px'></i>
-                <p style="margin:5px;">
-                  Alertas
+              <a href="{{ url_for('ubicacion') }}" class="nav-link">
+                <i class="nav-icon fas fa-map-marked-alt"></i>
+                <p> Ubicaciones
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -132,22 +132,27 @@
             </li>
 
             <!--li class="nav-item">
+              <a href="{{ url_for('alertas') }}" class="nav-link">
+                <i class='fas fa-bell' style='font-size:24px'></i>
+                <p style="margin:5px;">
+                  Alertas
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+            </li
+
+
+
+            <li class="nav-item">
             <a href="{{ url_for('sensores') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Sensores
               </p>
             </a>
-          </li-->
+          </li>
 
-            <li class="nav-item">
-              <a href="{{ url_for('ubicacion') }}" class="nav-link">
-                <i class="nav-icon fas fa-map-marked-alt"></i>
-                <p> Ubicaciones
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-            </li>
+
 
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -156,7 +161,7 @@
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
-            </li>
+            </li-->
 
             <li class="nav-item">
               <a href="{{ url_for('salir') }}" class="nav-link">
